@@ -16,7 +16,8 @@ def python_rearrange(words):
         # words[updated_last_index] = save_word
         updated_last_index = updated_last_index - 1
     s = s.join(words)
-    print(s)
+    return s
+
 
 python_rearrange(sys.argv[1:])
 
