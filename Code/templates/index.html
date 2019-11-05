@@ -1,0 +1,29 @@
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+
+  <!-- CALL TO ACTION -->
+  <div class="jumbotron text-center">
+    <h1>{{ word }}</h1>
+    <p class="lead mb-4">Enter a Word</p>
+    <div class="d-flex justify-content-center">
+      <form action="#" class='form-inline'>
+        <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Enter a word" value='{{ histogram.word }}'/>
+        <button type="submit" class="btn btn-primary mb-2">Enter</button>
+      </form>
+    </div>
+  </div>
+
+  {% endblock %}
+
+
