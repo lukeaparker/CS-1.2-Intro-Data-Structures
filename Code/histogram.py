@@ -2,13 +2,12 @@ import sys
 import collections
 import sample
 
-def histogram():
-    words = ""
+def histogram(input):
     with open('src.txt', 'r') as file:
         data = file.read()
         text = data.split()
     histo = []
-    for word in words:
+    for word in input:
         count = sum(word == s for s in text)
         cell = [word, count]
         if cell not in histo:

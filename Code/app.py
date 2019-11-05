@@ -16,15 +16,14 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     """Return homepage."""
-    return render_template('index.html', tweet=tweet.find())
+    return render_template('index.html')
 
 @app.route('/')
 def input_word():
-    """Submit a new word."""
-    get = sample.get_word(histogram)
-    word = ""
-    print(word)
-    return get
+    input = ""
+    print(input)
+    return render_template('index.html'), input
+
 
  
 
