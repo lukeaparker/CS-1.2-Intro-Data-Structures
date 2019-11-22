@@ -2,7 +2,7 @@
 
 from __future__ import division, print_function  # Python 2 and 3 compatibility
 import random
-
+import utils
 
 class Dictogram(dict):
     """Dictogram is a histogram implemented as a subclass of the dict type."""
@@ -11,6 +11,7 @@ class Dictogram(dict):
         """Initialize this histogram as a new dict and count given words."""
         super(Dictogram, self).__init__()  # Initialize this as a new dict
         # Add properties to track useful word counts for this histogram
+        self.word_list = word_list
         self.types = 0  # Count of distinct word types in this histogram
         self.tokens = 0  # Total count of all word tokens in this histogram
         # Count words in given list, if any
