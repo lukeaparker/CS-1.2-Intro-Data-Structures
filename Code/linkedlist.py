@@ -7,6 +7,7 @@ class Node(object):
         """Initialize this node with the given data."""
         self.data = data
         self.next = None
+        self.previous = None
 
     def __repr__(self):
         """Return a string representation of this node."""
@@ -19,6 +20,7 @@ class LinkedList(object):
         """Initialize this linked list and append the given items, if any."""
         self.head = None  # First node
         self.tail = None  # Last node
+        self.count = 0
         # Append given items
         if items is not None:
             for item in items:
@@ -54,38 +56,79 @@ class LinkedList(object):
 
     def length(self):
         """Return the length of this linked list by traversing its nodes.
-        TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Loop through all nodes and count one for each
+        Running time: O(1) Because it's done automaticly meaning it will take the same time to calculate everytime"""
+        return self.count
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
-        TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Create new node to hold given item
-        # TODO: Append node after tail, if it exists
+        Running time: O(1) will always take the same amount of actions"""
+        
+        node = Node(item)
+        if self.is_empty():
+            self.head = node
+            self.tail = node 
+            self.count += 1
+        else:
+            self.tail.next = node
+            node.previous = self.tail 
+            self.tail = node 
+            self.count += 1
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
-        TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Create new node to hold given item
-        # TODO: Prepend node before head, if it exists
+        Running time: O(1) Take one loop to complete the function everytime"""
+        node = Node(item)
+        # TODO: Append node after tail, if it exists
+        if self.is_empty():
+            self.head = node
+            self.tail = node 
+            self.count += 1
+        else:
+            node.next = self.head
+            self.head.previous = node
+            self.head = node 
+            self.count += 1
 
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
-        TODO: Best case running time: O(???) Why and under what conditions?
-        TODO: Worst case running time: O(???) Why and under what conditions?"""
-        # TODO: Loop through all nodes to find item where quality(item) is True
-        # TODO: Check if node's data satisfies given quality function
+        Best case running time: O(1) Assuming it's run in one loop?
+        Worst case running time: O(n) Scalable depending on n being input?"""
+        node = self.head
+        while node is not None:
+            if quality(node.data) == False:
+                node = node.next
+            elif quality(node.data) == True:
+                return node
+        return None 
+
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
-        TODO: Best case running time: O(???) Why and under what conditions?
-        TODO: Worst case running time: O(???) Why and under what conditions?"""
-        # TODO: Loop through all nodes to find one whose data matches given item
-        # TODO: Update previous node to skip around node with matching data
-        # TODO: Otherwise raise error to tell user that delete has failed
-        # Hint: raise ValueError('Item not found: {}'.format(item))
+        Best case running time: O(1) Completed in one loop?
+        Worst case running time: O(n) Depending on the input of user?"""
+        if item in self.items():
+            node = self.find(lambda data: data == item)
+            if node != self.head and node != self.tail:
+                node.previous.next = node.next
+                node.next.previous = node.previous
+                self.count -= 1
+            elif node == self.head and node == self.tail:
+                self.tail = None
+                self.head = None
+                self.count = 0
+            elif node == self.head and node != self.tail:
+                self.head = node.next 
+                self.head.previous = None
+                self.count -= 1 
+            elif node == self.tail and node != self.head:
+                self.tail = node.previous 
+                self.tail.next = None 
+                self.count -= 1
+        else:
+            raise ValueError('Item not found: {}'.format(item))
 
 
+ 
 def test_linked_list():
     ll = LinkedList()
     print('list: {}'.format(ll))
@@ -100,10 +143,13 @@ def test_linked_list():
     print('tail: {}'.format(ll.tail))
     print('length: {}'.format(ll.length()))
 
+    print(ll.find(lambda data: data == "B"))
+
     # Enable this after implementing delete method
-    delete_implemented = False
+    delete_implemented = True
     if delete_implemented:
         print('\nTesting delete:')
+        print(ll.items())
         for item in ['B', 'C', 'A']:
             print('delete({!r})'.format(item))
             ll.delete(item)
