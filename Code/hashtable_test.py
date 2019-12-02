@@ -28,6 +28,7 @@ class HashTableTest(unittest.TestCase):
         ht = HashTable()
         assert ht.values() == []
         ht.set('I', 1)
+        print(ht.values())
         assert ht.values() == [1]
         ht.set('V', 5)
         self.assertCountEqual(ht.values(), [1, 5])  # Ignore item order

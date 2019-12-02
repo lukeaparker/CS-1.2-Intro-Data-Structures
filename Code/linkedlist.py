@@ -94,12 +94,18 @@ class LinkedList(object):
         Best case running time: O(1) Assuming it's run in one loop?
         Worst case running time: O(n) Scalable depending on n being input?"""
         node = self.head
-        while node is not None:
+        while node != None:
             if quality(node.data) == False:
                 node = node.next
-            elif quality(node.data) == True:
+            elif node.data != None:
                 return node
         return None 
+
+    def update(self, og_item, new_item):
+        '''  find and replace node with given arguments '''
+        node = self.find(lambda item: item == og_item)
+        node.data = new_item
+        return node 
 
 
     def delete(self, item):
