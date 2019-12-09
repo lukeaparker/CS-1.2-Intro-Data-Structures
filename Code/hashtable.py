@@ -46,7 +46,7 @@ class HashTable(object):
         # TODO: Loop through all buckets
         # TODO: Collect all values in each bucket
         all_values = []
-        for bucket in self.buckets:
+        for bucket in self.buckets: 
             for key, value in bucket.items():
                 all_values.append(value)
         return all_values
