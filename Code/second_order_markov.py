@@ -6,7 +6,6 @@ import app
 
 
 class Markov(Dictogram):
-  
     def build_markov(self, file_name):
         previous = None
         self.word_list = utils.get_words(file_name) 
